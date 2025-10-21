@@ -1,0 +1,11 @@
+<svg width="220" height="140" viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+<rect width="220" height="140" rx="20" fill="#fff6f1"/>
+<g fill="none" stroke="#d43b2c" stroke-opacity="0.35">
+  <path d="M10,70 q50,-50 100,0 t100,0" />
+  <path d="M10,90 q50,-50 100,0 t100,0" />
+</g>
+<g fill="none" stroke="#3a7d6b" stroke-opacity="0.25">
+  <circle cx="40" cy="40" r="10"/>
+  <circle cx="180" cy="30" r="8"/>
+</g>
+</svg>
