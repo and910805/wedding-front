@@ -1,8 +1,8 @@
 import { useTheme } from '../theme/ThemeContext'
-export default function Section({title, subtitle, children}){
+export default function Section({id, title, subtitle, children}){
   const { theme } = useTheme()
   return (
-    <section className="container-xl my-8 md:my-12">
+    <section id={id} className="container-xl my-8 md:my-12">
       <div className="text-center mb-4 md:mb-8">
         <h2 className={`text-2xl md:text-4xl font-serif tracking-wide ${theme==='tang'?'text-cinnabar':''}`}>{title}</h2>
         {subtitle && <p className="font-sans text-stone-600 mt-1 md:mt-2 text-sm md:text-base">{subtitle}</p>}
