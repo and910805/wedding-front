@@ -10,7 +10,7 @@ export default {
       fontFamily: {
         serif: ["Playfair Display", "Noto Serif TC", "serif"],
         sans: ["Inter", "ui-sans-serif", "system-ui", "Segoe UI"],
-        script: ["Ma Shan Zheng", "cursive"]
+        script: ["Great Vibes", "Ma Shan Zheng", "cursive"]
       },
       boxShadow: { soft: "0 10px 20px rgba(0,0,0,0.08)" }
     },
