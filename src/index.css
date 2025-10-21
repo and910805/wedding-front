@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile-first helpers */
+.container-xl { @apply mx-auto px-4 w-full max-w-6xl; }
+.btn { @apply inline-flex items-center gap-2 rounded-full px-5 py-2 border bg-white/85 backdrop-blur hover:bg-white transition shadow-soft; }
+.card { @apply bg-white/80 backdrop-blur rounded-3xl border shadow-soft; }
+
+:root, html, body { height: 100%; }
+body { @apply min-h-screen antialiased; }
+
+/* Theme backgrounds */
+[data-theme="euro"] body {
+  background-color: #faf6ef;
+  background-image:
+    radial-gradient(rgba(176,141,87,0.08) 1px, transparent 1px),
+    radial-gradient(rgba(176,141,87,0.06) 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+}
+[data-theme="tang"] body {
+  background-color: #fff9f4;
+  background-image:
+    radial-gradient(rgba(212,59,44,0.08) 1px, transparent 1px),
+    radial-gradient(rgba(58,125,107,0.06) 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 40px 40px;
+}
+
+img { @apply block w-full h-auto; }
