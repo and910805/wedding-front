@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import Section from '../components/Section'
-import GalleryAuto from '../components/GalleryAuto'
+import { Link } from 'react-router-dom'
 import { AutoThemeTarget } from '../theme/ThemeContext'
 import WeddingInvitationModal from '../components/WeddingInvitationModal'
 
@@ -29,25 +28,17 @@ export default function Home(){
             >
               婚禮資訊
             </button>
-            <a
-              href="#gallery"
+            <Link
+              to="/gallery"
               className="w-full rounded-full border border-cinnabar/40 bg-white/70 px-8 py-3 font-serif text-base tracking-wide text-cinnabar shadow-soft transition hover:border-cinnabar/60 hover:bg-white md:w-48"
             >
               照片畫廊
-            </a>
+            </Link>
           </div>
         </div>
       </AutoThemeTarget>
 
       <WeddingInvitationModal open={isInvitationOpen} onClose={closeInvitation} />
-
-      <Section
-        id="gallery"
-        title="照片畫廊"
-        subtitle="婚禮的動人片段彙整成單一畫廊，讓回憶更聚焦。"
-      >
-        <GalleryAuto />
-      </Section>
     </main>
   )
 }
