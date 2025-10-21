@@ -13,7 +13,7 @@ export default function Navbar(){
             alt="logo"
             className="h-7 w-7 md:h-8 md:w-8"
           />
-          <span className={`text-lg md:text-xl font-serif tracking-wide ${theme==='tang' ? 'text-cinnabar' : 'text-forest'}`}>我們的婚禮</span>
+          <span className={`text-lg md:text-xl font-serif tracking-wide ${theme==='tang' ? 'text-cinnabar' : 'text-forest'}`}>莊雨瑄 & 趙國宏</span>
         </Link>
         <nav className="flex items-center gap-4 md:gap-6 font-sans text-sm md:text-base">
           {['/', '/story', '/gallery', '/seating'].map((p)=>{
