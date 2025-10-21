@@ -21,7 +21,7 @@ export const storyTang = [
     date: "仲夏",
     place: "御道",
     text: "階前有風，我們的步伐在同一個節拍上。",
-    photo: assetUrl('photos/tang/橋上紅禮.jpg'),
+    photo: assetUrl('photos/tang/橋上紅裙.jpg'),
   },
   {
     title: "蓮燈映面",
@@ -42,6 +42,6 @@ export const storyTang = [
     date: "花燭夜",
     place: "丹壁前",
     text: "鸞鳳和鳴，山河作賀，我們把一生按下紅印。",
-    photo: assetUrl('photos/tang/橋上紅禮.jpg'),
+    photo: assetUrl('photos/tang/橋上紅裙.jpg'),
   },
 ];
