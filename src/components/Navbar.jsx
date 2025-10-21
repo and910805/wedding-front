@@ -16,8 +16,8 @@ export default function Navbar(){
           <span className={`text-lg md:text-xl font-serif tracking-wide ${theme==='tang' ? 'text-cinnabar' : 'text-forest'}`}>莊雨瑄 & 趙國宏</span>
         </Link>
         <nav className="flex items-center gap-4 md:gap-6 font-sans text-sm md:text-base">
-          {['/', '/story', '/gallery', '/seating'].map((p)=>{
-            const labels = { '/': '首頁', '/story': '故事', '/gallery': '相簿', '/seating': '座位' }
+          {['/', '/story', '/gallery', '/seating', '/creator'].map((p)=>{
+            const labels = { '/': '首頁', '/story': '故事', '/gallery': '相簿', '/seating': '座位', '/creator': '創作人' }
             return (
               <NavLink key={p} to={p} className={({isActive}) =>
                 `pb-0.5 ${isActive ? (theme==='tang'?'text-cinnabar':'text-forest') : 'text-stone-700 hover:text-stone-900'}`}>

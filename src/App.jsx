@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Story from './pages/Story'
 import GalleryPage from './pages/GalleryPage'
 import SeatingPage from './pages/SeatingPage'
+import CreatorContact from './pages/CreatorContact'
 import { ThemeProvider } from './theme/ThemeContext'
 
 export default function App(){
@@ -17,6 +18,7 @@ export default function App(){
           <Route path="/story" element={<Story />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/seating" element={<SeatingPage />} />
+          <Route path="/creator" element={<CreatorContact />} />
         </Routes>
         <Footer />
       </div>
