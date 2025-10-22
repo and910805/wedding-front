@@ -6,12 +6,14 @@ import Story from './pages/Story'
 import GalleryPage from './pages/GalleryPage'
 import SeatingPage from './pages/SeatingPage'
 import CreatorContact from './pages/CreatorContact'
+import FallingPetals from './components/FallingPetals'
 import { ThemeProvider } from './theme/ThemeContext'
 
 export default function App(){
   return (
     <ThemeProvider>
-      <div className="font-serif text-stone-800">
+      <FallingPetals />
+      <div className="relative z-10 font-sans text-stone-800">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

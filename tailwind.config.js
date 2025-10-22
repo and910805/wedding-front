@@ -5,12 +5,12 @@ export default {
     extend: {
       colors: {
         ivory: "#faf6ef", blush: "#f4e3e3", forest: "#2f4939", sage: "#8ea192",
-        gold: "#b08d57", cinnabar: "#d43b2c", peony: "#f5b5c8", jade: "#3a7d6b", cloud: "#f7efe7",
+        gold: "#b08d57", cinnabar: "#E05A47", peony: "#f5b5c8", jade: "#3a7d6b", cloud: "#f7efe7",
       },
       fontFamily: {
-        serif: ["Playfair Display", "Noto Serif TC", "serif"],
-        sans: ["Inter", "ui-sans-serif", "system-ui", "Segoe UI"],
-        script: ["Great Vibes", "Ma Shan Zheng", "cursive"]
+        serif: ["Noto Serif TC", "Playfair Display", "serif"],
+        sans: ["Noto Sans TC", "Noto Sans", "sans-serif"],
+        script: ["Parisienne", "Playfair Display", "cursive"]
       },
       boxShadow: { soft: "0 10px 20px rgba(0,0,0,0.08)" }
     },
