@@ -70,7 +70,7 @@ export default function WeddingInvitation({ className = '' }) {
   }, [isOpen])
 
   return (
-    <div className={clsx('relative mx-auto w-full max-w-4xl', className)}>
+    <div className={clsx('relative mx-auto w-full max-w-5xl sm:max-w-6xl', className)}>
       <div className="relative aspect-[3/2] w-full" style={{ perspective: '1600px' }}>
         <div
           className="absolute inset-0 overflow-hidden rounded-[40px] border-2 border-cinnabar/25 bg-ivory/95 shadow-soft"
@@ -227,7 +227,7 @@ export default function WeddingInvitation({ className = '' }) {
         </div>
 
         <motion.div
-          className="pointer-events-none absolute left-1/2 top-[6%] z-30 h-[58%] w-[86%] -translate-x-1/2"
+          className="pointer-events-none absolute left-1/2 top-[5%] z-30 h-[62%] w-[92%] -translate-x-1/2"
           style={{
             transformOrigin: 'top center',
             transformStyle: 'preserve-3d',
@@ -256,7 +256,7 @@ export default function WeddingInvitation({ className = '' }) {
           />
         </motion.div>
 
-        <div className="absolute inset-x-[6%] bottom-[6%] z-20 h-[42%] rounded-[32px] border border-cinnabar/25 bg-white/60 shadow-soft" />
+        <div className="absolute inset-x-[5%] bottom-[5%] z-20 h-[45%] rounded-[32px] border border-cinnabar/25 bg-white/60 shadow-soft" />
 
         <AnimatePresence>
           {isOpen && !prefersReducedMotion && (
