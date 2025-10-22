@@ -8,8 +8,8 @@ export default {
         gold: "#b08d57", cinnabar: "#d43b2c", peony: "#f5b5c8", jade: "#3a7d6b", cloud: "#f7efe7",
       },
       fontFamily: {
-        serif: ["Playfair Display", "Noto Serif TC", "serif"],
-        sans: ["Inter", "ui-sans-serif", "system-ui", "Segoe UI"],
+        serif: ["Noto Serif TC", "Playfair Display", "serif"],
+        sans: ["Noto Sans TC", "Josefin Sans", "sans-serif"],
         script: ["Great Vibes", "Ma Shan Zheng", "cursive"]
       },
       boxShadow: { soft: "0 10px 20px rgba(0,0,0,0.08)" }

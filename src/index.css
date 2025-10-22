@@ -2,13 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-serif: "Noto Serif TC", "Playfair Display", "Times New Roman", serif;
+  --font-sans: "Noto Sans TC", "Josefin Sans", "Helvetica Neue", sans-serif;
+}
+
 /* Mobile-first helpers */
 .container-xl { @apply mx-auto px-4 w-full max-w-6xl; }
 .btn { @apply inline-flex items-center gap-2 rounded-full px-5 py-2 border bg-white/85 backdrop-blur hover:bg-white transition shadow-soft; }
 .card { @apply bg-white/80 backdrop-blur rounded-3xl border shadow-soft; }
 
-:root, html, body { height: 100%; }
+:root, html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  color: #2b2b2b;
+  letter-spacing: 0.02em;
+}
 body { @apply min-h-screen antialiased; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  letter-spacing: 0.05em;
+}
+
+.font-serif { font-family: var(--font-serif); }
+.font-sans { font-family: var(--font-sans); }
 
 /* Theme backgrounds */
 [data-theme="euro"] body {
@@ -29,3 +52,16 @@ body { @apply min-h-screen antialiased; }
 }
 
 img { @apply block w-full h-auto; }
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-fall { animation: fall linear infinite; }

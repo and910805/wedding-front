@@ -7,7 +7,7 @@ export const tables = [
   { id: 6, name: "特別來賓 VIP", seats: 10 },
 ]
 export const guests = [
+  { name: "莊冠霖", aliases: ["Eric", "Zhuang Guanlin"], tableId: 3, seatNo: 5 },
   { name: "王小明", tableId: 1, seatNo: 3 },
   { name: "李小美", tableId: 1, seatNo: 4 },
-  { name: "Eric", tableId: 3, seatNo: 5 },
 ]
