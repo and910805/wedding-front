@@ -5,7 +5,7 @@ import { AutoThemeTarget } from '../theme/ThemeContext'
 import WeddingInvitationModal from '../components/WeddingInvitationModal'
 
 export default function Home() {
-  const [isInvitationOpen, setInvitationOpen] = useState(false)
+  const [isInvitationOpen, setInvitationOpen] = useState(true)
   const prefersReducedMotion = useReducedMotion()
 
   const poemText = `他們，
