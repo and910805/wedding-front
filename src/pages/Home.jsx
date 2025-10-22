@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { AutoThemeTarget } from '../theme/ThemeContext'
 import WeddingInvitationModal from '../components/WeddingInvitationModal'
 
-export default function Home(){
+export default function Home() {
   const [isInvitationOpen, setInvitationOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
 
@@ -43,12 +43,25 @@ export default function Home(){
       <AutoThemeTarget theme="euro" className="container-xl pt-10 md:pt-16 pb-10">
         <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-left">
           <div className="max-w-xl">
-            <p className="text-sm uppercase tracking-[0.35em] text-cinnabar/70 font-serif">Wedding Day</p>
-            <h1 className="mt-3 text-3xl md:text-5xl font-serif leading-tight text-stone-900">莊雨瑄 ＆ 趙國宏</h1>
-            <p className="mt-4 font-serif text-base md:text-lg leading-relaxed text-stone-700">
+            <p className="text-sm uppercase tracking-[0.35em] text-cinnabar/70 font-serif">
+              Wedding Day
+            </p>
+            <h1 className="mt-3 text-3xl md:text-5xl font-serif leading-tight text-stone-900">
+              莊雨瑄 ＆ 趙國宏
+            </h1>
+            {/* ✅ 修正版：桌機單行、手機自動適應不破圖 */}
+            <p
+              className="mt-4 font-serif text-sm md:text-base leading-relaxed text-stone-700 
+                         text-center md:text-left sm:whitespace-nowrap 
+                         [text-wrap:balance] sm:[text-wrap:nowrap]"
+              style={{
+                fontSize: 'clamp(12px, 2.5vw, 16px)',
+              }}
+            >
               滿載真摯與浪漫的婚禮網站，收藏我們相守的約定，也誠摯邀請您一同蒞臨見證。
             </p>
           </div>
+
           <div className="flex w-full flex-col items-center gap-4 md:w-auto md:items-end">
             <button
               type="button"
@@ -71,12 +84,18 @@ export default function Home(){
         className="poem-section bg-rose-50 px-6 py-16 text-center"
         initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: prefersReducedMotion ? 'linear' : [0.16, 1, 0.3, 1] }}
+        transition={{
+          duration: prefersReducedMotion ? 0 : 0.6,
+          ease: prefersReducedMotion ? 'linear' : [0.16, 1, 0.3, 1],
+        }}
       >
         <div className="mx-auto max-w-3xl space-y-6">
-          <h2 className="text-2xl font-serif tracking-[0.2em] text-cinnabar md:text-3xl">💍 Our Story</h2>
+          <h2 className="text-2xl font-serif tracking-[0.2em] text-cinnabar md:text-3xl">
+            💍 Our Story
+          </h2>
           <p className="whitespace-pre-line font-serif text-lg leading-8 text-stone-700 md:text-xl md:leading-9">
             {poemText}
+			
           </p>
         </div>
       </motion.section>
