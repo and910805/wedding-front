@@ -194,16 +194,49 @@ export default function WeddingInvitation({ className = '' }) {
                 key="cover"
                 type="button"
                 onClick={() => setIsOpen(true)}
-                className="absolute inset-0 flex flex-col items-center justify-center gap-4 sm:gap-6 rounded-2xl sm:rounded-[32px] md:rounded-[40px] bg-gradient-to-br from-white/80 via-rose-50/70 to-rose-100/60 backdrop-blur-md transition focus:outline-none focus-visible:ring-4 focus-visible:ring-cinnabar/50 hover:from-white/90 hover:via-rose-50/80 hover:to-rose-100/70"
+                className="group absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl sm:rounded-[32px] md:rounded-[40px] bg-transparent backdrop-blur-md transition focus:outline-none focus-visible:ring-4 focus-visible:ring-cinnabar/50"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: prefersReducedMotion ? 0 : -20 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.8, 0.25, 1] }}
                 aria-label="開啟婚禮邀請卡"
               >
-                <span className="text-center font-serif text-3xl sm:text-5xl md:text-6xl text-cinnabar drop-shadow-sm">趙國宏 ＆ 莊雨瑄</span>
-                <span className="font-script text-lg sm:text-2xl md:text-3xl text-cinnabar/80">Tap to open the invitation</span>
-                <span className="text-xs sm:text-sm font-serif uppercase tracking-[0.4em] text-cinnabar/70">Wedding Invitation</span>
+                <span className="pointer-events-none absolute inset-0">
+                  <span className="absolute inset-x-5 inset-y-6 sm:inset-x-8 sm:inset-y-8 md:inset-x-10 md:inset-y-10 rounded-[26px] sm:rounded-[32px] md:rounded-[36px] bg-gradient-to-br from-rose-50/92 via-white to-ivory/92 shadow-2xl transition duration-500 group-hover:from-rose-100 group-hover:via-white group-hover:to-ivory" />
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 top-[8%] h-[58%] w-[88%] -translate-x-1/2 rounded-t-[34px] bg-gradient-to-b from-rose-100/95 via-rose-50/85 to-ivory/80 shadow-[0_18px_32px_rgba(180,125,125,0.22)]"
+                    style={{ clipPath: 'polygon(0% 0%, 50% 72%, 100% 0%, 100% 100%, 0% 100%)' }}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 bottom-[9%] h-[54%] w-[90%] -translate-x-1/2 rounded-b-[30px] bg-gradient-to-br from-rose-50/30 via-white/65 to-rose-100/35"
+                    style={{ clipPath: 'polygon(0% 0%, 50% 76%, 100% 0%, 100% 100%, 0% 100%)' }}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-[17%] top-[46%] h-px bg-gradient-to-r from-transparent via-rose-200/80 to-transparent"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute left-1/2 bottom-[21%] h-[46%] w-[76%] -translate-x-1/2"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(124deg, rgba(223, 176, 177, 0.42), rgba(223, 176, 177, 0) 55%), linear-gradient(236deg, rgba(223, 176, 177, 0.42), rgba(223, 176, 177, 0) 55%)',
+                      clipPath: 'polygon(0% 0%, 50% 74%, 100% 0%, 100% 100%, 0% 100%)',
+                    }}
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-[18%] bottom-[15%] h-px bg-gradient-to-r from-transparent via-rose-200/70 to-transparent"
+                  />
+                </span>
+
+                <span className="relative z-30 flex flex-col items-center gap-3 pt-24 pb-12 text-center sm:gap-4 sm:pt-28 sm:pb-14">
+                  <span className="font-serif text-3xl text-cinnabar drop-shadow-sm sm:text-5xl md:text-6xl">趙國宏 ＆ 莊雨瑄</span>
+                  <span className="font-script text-base text-cinnabar/80 sm:text-2xl md:text-3xl">Tap to open the invitation</span>
+                  <span className="text-xs font-serif uppercase tracking-[0.4em] text-cinnabar/70 sm:text-sm">Wedding Invitation</span>
+                </span>
               </motion.button>
             )}
           </AnimatePresence>
