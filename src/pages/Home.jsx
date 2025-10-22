@@ -45,9 +45,10 @@ export default function Home(){
           <div className="max-w-xl">
             <p className="text-sm uppercase tracking-[0.35em] text-cinnabar/70 font-serif">Wedding Day</p>
             <h1 className="mt-3 text-3xl md:text-5xl font-serif leading-tight text-stone-900">莊雨瑄 ＆ 趙國宏</h1>
-            <p className="mt-4 font-sans text-base md:text-lg text-stone-700">
-              滿載真摯與浪漫的婚禮網站，收藏我們相守的約定，也誠摯邀請您一同蒞臨見證。
-            </p>
+            <p className="mt-4 font-sans text-base md:text-lg text-stone-700 whitespace-nowrap">
+  滿載真摯與浪漫的婚禮網站，收藏我們相守的約定，也誠摯邀請您一同蒞臨見證。
+</p>
+	
           </div>
           <div className="flex w-full flex-col items-center gap-4 md:w-auto md:items-end">
             <button
