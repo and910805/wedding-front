@@ -42,7 +42,7 @@ export default function GalleryAuto() {
       {/* 標題區域 */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <p className="text-rose-400/90 font-script text-3xl md:text-4xl tracking-wider">綻放的時光</p>
-        <p className="text-base md:text-lg text-stone-600 leading-relaxed">
+        <p className="font-sans text-base md:text-lg text-stone-600 leading-relaxed">
           光影中收藏的笑顏與擁抱，成為我們最真摯的婚禮記憶
         </p>
 
@@ -58,7 +58,7 @@ export default function GalleryAuto() {
             </svg>
             進入放映模式
           </button>
-          <p className="text-xs sm:text-sm md:text-base text-stone-500 mt-3 whitespace-nowrap">
+          <p className="font-sans text-xs sm:text-sm md:text-base text-stone-500 mt-3 whitespace-nowrap">
             點擊上方按鈕以全螢幕幻燈片模式瀏覽所有照片，享受沉浸式的觀看體驗
           </p>
         </div>
@@ -121,7 +121,7 @@ export default function GalleryAuto() {
 
       {/* 圖片總數顯示 */}
       <div className="text-center pt-6 border-t border-rose-100">
-        <p className="text-stone-500 text-sm md:text-base">
+        <p className="font-sans text-stone-500 text-sm md:text-base">
           共 {items.length} 張精選照片，點擊上方「進入放映模式」按鈕即可瀏覽完整相簿
         </p>
       </div>

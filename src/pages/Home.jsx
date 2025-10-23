@@ -1,12 +1,8 @@
-import { Suspense, lazy, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { AutoThemeTarget } from '../theme/ThemeContext'
 
-const WeddingInvitationModal = lazy(() => import('../components/WeddingInvitationModal'))
-
 export default function Home() {
-  const [isInvitationOpen, setInvitationOpen] = useState(true)
   const prefersReducedMotion = useReducedMotion()
 
   const poemText = `他們，
@@ -36,15 +32,12 @@ export default function Home() {
 從青春的校園開始，
 在愛裡長成永恆。`
 
-  const openInvitation = () => setInvitationOpen(true)
-  const closeInvitation = () => setInvitationOpen(false)
-
   return (
     <main>
       <AutoThemeTarget theme="euro" className="container-xl pt-10 md:pt-16 pb-10">
         <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-left">
           <div className="max-w-xl">
-            <p className="text-sm uppercase tracking-[0.35em] text-cinnabar/70 font-serif">
+            <p className="text-sm uppercase tracking-[0.35em] text-cinnabar/70 font-sans">
               Wedding Day
             </p>
             <h1 className="mt-3 text-3xl md:text-5xl font-serif leading-tight text-stone-900">
@@ -52,8 +45,8 @@ export default function Home() {
             </h1>
             {/* ✅ 修正版：桌機單行、手機自動適應不破圖 */}
             <p
-              className="mt-4 font-serif text-sm md:text-base leading-relaxed text-stone-700 
-                         text-center md:text-left sm:whitespace-nowrap 
+              className="mt-4 font-sans text-sm md:text-base leading-relaxed text-stone-700
+                         text-center md:text-left sm:whitespace-nowrap
                          [text-wrap:balance] sm:[text-wrap:nowrap]"
               style={{
                 fontSize: 'clamp(12px, 2.5vw, 16px)',
@@ -64,16 +57,18 @@ export default function Home() {
           </div>
 
           <div className="flex w-full flex-col items-center gap-4 md:w-auto md:items-end">
-            <button
-              type="button"
-              onClick={openInvitation}
-              className="w-full rounded-full bg-cinnabar px-8 py-3 font-serif text-base tracking-wide text-white shadow-lg transition hover:bg-cinnabar/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-cinnabar/70 focus-visible:ring-offset-2 focus-visible:ring-offset-rose-50 md:w-48"
+            <a
+              href="https://wwwe789.my.canva.site/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full rounded-full bg-cinnabar px-8 py-3 text-base tracking-wide text-white shadow-lg transition hover:bg-cinnabar/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-cinnabar/70 focus-visible:ring-offset-2 focus-visible:ring-offset-rose-50 md:w-48 font-sans"
             >
               婚禮資訊
-            </button>
+              <span className="ml-2 text-xs align-middle opacity-80">↗</span>
+            </a>
             <Link
               to="/gallery"
-              className="w-full rounded-full border border-cinnabar/40 bg-white/70 px-8 py-3 font-serif text-base tracking-wide text-cinnabar shadow-soft transition hover:border-cinnabar/60 hover:bg-white md:w-48"
+              className="w-full rounded-full border border-cinnabar/40 bg-white/70 px-8 py-3 text-base tracking-wide text-cinnabar shadow-soft transition hover:border-cinnabar/60 hover:bg-white md:w-48 font-sans"
             >
               照片畫廊
             </Link>
@@ -94,24 +89,12 @@ export default function Home() {
           <h2 className="text-2xl font-serif tracking-[0.2em] text-cinnabar md:text-3xl">
             💍 Our Story
           </h2>
-          <p className="whitespace-pre-line font-serif text-lg leading-8 text-stone-700 md:text-xl md:leading-9">
+          <p className="whitespace-pre-line font-sans text-lg leading-8 text-stone-700 md:text-xl md:leading-9">
             {poemText}
-			
+
           </p>
         </div>
       </motion.section>
-
-      <Suspense
-        fallback={(
-          <div className="flex items-center justify-center bg-white/70 py-10">
-            <p className="font-serif text-base tracking-[0.3em] text-cinnabar/70">
-              婚禮資訊載入中⋯
-            </p>
-          </div>
-        )}
-      >
-        <WeddingInvitationModal open={isInvitationOpen} onClose={closeInvitation} />
-      </Suspense>
     </main>
   )
 }

@@ -10,7 +10,7 @@ export default function GalleryPage() {
             <h1 className="text-4xl md:text-5xl font-serif font-normal text-stone-800 mb-4">
               婚禮回憶
             </h1>
-            <p className="text-lg md:text-xl text-stone-600 leading-relaxed">
+            <p className="font-sans text-lg md:text-xl text-stone-600 leading-relaxed">
               每一個瞬間都是永恆，每一張照片都是故事
             </p>
           </div>
@@ -43,9 +43,9 @@ export default function GalleryPage() {
       {/* Footer Note */}
       <div className="bg-stone-50 border-t border-stone-200 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center text-stone-500 text-sm">
+          <div className="text-center text-stone-500 text-sm font-sans space-y-2">
             <p>感謝所有參與我們重要日子的親朋好友</p>
-            <p className="mt-2">這些珍貴的時刻將永遠留在我們心中</p>
+            <p>這些珍貴的時刻將永遠留在我們心中</p>
           </div>
         </div>
       </div>
