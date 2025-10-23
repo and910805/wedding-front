@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo ,useEffect} from 'react'
 import { photosEuro } from '../data/photosEuro'
 import { photosTang } from '../data/photosTang'
 import Lightbox from './Lightbox'
@@ -7,6 +7,9 @@ export default function GalleryAuto() {
   // 合併所有圖片（順序你可以自己調整）
   const items = useMemo(() => [...photosTang, ...photosEuro], [])
   const [activeIndex, setActiveIndex] = useState(null)
+  useEffect(() => {
+    if (document?.body?.style?.overflow === 'hidden') document.body.style.overflow = ''
+  }, [])
 
   return (
     <div className="space-y-6 md:space-y-8">

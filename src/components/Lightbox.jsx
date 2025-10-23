@@ -22,27 +22,19 @@ const IconChevronRight = ({ className = 'h-6 w-6' }) => (
 )
 
 export default function Lightbox({ open, items = [], index = 0, onClose, onPrev, onNext }) {
-  const scrollLayerRef = useRef(null)  // 可滾動的外層
-  const viewportRef = useRef(null)     // 可視框（固定寬高，用來計算邊界）
+  const viewportRef = useRef(null)
   const startXRef = useRef(null)
 
-  // 原始尺寸用於邊界計算
   const [natural, setNatural] = useState({ w: 0, h: 0 })
-
-  // 縮放 / 平移狀態
   const [scale, setScale] = useState(1)
   const [tx, setTx] = useState(0)
   const [ty, setTy] = useState(0)
   const [dragging, setDragging] = useState(false)
   const dragRef = useRef({ dx: 0, dy: 0 })
-
-  // 觸控縮放狀態
   const pinchRef = useRef({ dist: 0, scale: 1, center: { x: 0, y: 0 } })
 
-  // 開啟或換圖 → 重置
   useEffect(() => { setScale(1); setTx(0); setTy(0) }, [open, index])
 
-  // 鎖背景卷動＋鍵盤
   useEffect(() => {
     if (!open) return
     const original = document.body.style.overflow
@@ -63,38 +55,33 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
 
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v))
 
-  // 計算未放大時圖片在 viewport 內的實際顯示尺寸
   const getBaseSize = () => {
     const vp = viewportRef.current?.getBoundingClientRect()
-    if (!vp || natural.w === 0 || natural.h === 0) return { w: 0, h: 0 }
+    if (!vp || !natural.w || !natural.h) return { w: 0, h: 0 }
     const rImg = natural.w / natural.h
     const rVp = vp.width / vp.height
     if (rVp < rImg) {
       const w = vp.width
-      const h = w / rImg
-      return { w, h }
+      return { w, h: w / rImg }
     } else {
       const h = vp.height
-      const w = h * rImg
-      return { w, h }
+      return { w: h * rImg, h }
     }
   }
-
-  // 平移邊界
   const getPanBounds = (s) => {
     const vp = viewportRef.current?.getBoundingClientRect()
     const base = getBaseSize()
-    if (!vp || base.w === 0 || base.h === 0) return { maxX: 0, maxY: 0 }
-    const maxX = Math.max(0, (base.w * s - vp.width) / 2)
-    const maxY = Math.max(0, (base.h * s - vp.height) / 2)
-    return { maxX, maxY }
+    if (!vp || !base.w || !base.h) return { maxX: 0, maxY: 0 }
+    return {
+      maxX: Math.max(0, (base.w * s - vp.width) / 2),
+      maxY: Math.max(0, (base.h * s - vp.height) / 2),
+    }
   }
   const applyPanClamp = (nx, ny, s) => {
     const { maxX, maxY } = getPanBounds(s)
     return { x: clamp(nx, -maxX, maxX), y: clamp(ny, -maxY, maxY) }
   }
 
-  // 以滑鼠位置為中心縮放（中心為原點，未放大保持置中）
   const zoomAt = (clientX, clientY, nextScale) => {
     const rect = viewportRef.current.getBoundingClientRect()
     const s0 = scale
@@ -108,35 +95,26 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
     setScale(s1); setTx(clamped.x); setTy(clamped.y)
   }
 
-  // 滾輪：預設「捲動頁面」，只有在 Ctrl+滾輪 或 已放大 時才攔截
+  // ✅ 手機：未放大時允許「上下捲動整個放映層」
   const onWheel = (e) => {
     if (e.ctrlKey) {
-      // Ctrl+滾輪 → 縮放
       e.preventDefault()
       const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12
       zoomAt(e.clientX, e.clientY, scale * factor)
-      return
-    }
-    if (scale > 1) {
-      // 已放大 → 用滾輪平移（支援觸控板水平/垂直）
+    } else if (scale > 1) {
       e.preventDefault()
       const nx = tx - e.deltaX
       const ny = ty - e.deltaY
       const clamped = applyPanClamp(nx, ny, scale)
       setTx(clamped.x); setTy(clamped.y)
-      return
     }
-    // scale === 1 且沒按 Ctrl → 讓外層 scrollLayer 自然捲動
   }
 
-  // 雙擊：1x <-> 2x
   const onDoubleClick = (e) => {
     e.stopPropagation()
-    const target = scale > 1 ? 1 : 2
-    zoomAt(e.clientX, e.clientY, target)
+    zoomAt(e.clientX, e.clientY, scale > 1 ? 1 : 2)
   }
 
-  // 拖曳平移（放大後）
   const onMouseDown = (e) => {
     if (scale <= 1) return
     e.preventDefault()
@@ -150,10 +128,9 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
     const clamped = applyPanClamp(nx, ny, scale)
     setTx(clamped.x); setTy(clamped.y)
   }
-  const onMouseUp = () => setDragging(false)
-  const onMouseLeave = () => setDragging(false)
+  const stopDrag = () => setDragging(false)
 
-  // 觸控：單指拖曳、雙指縮放；未放大時左右滑切換
+  // 觸控：雙指縮放、單指拖曳；未放大可左右滑換圖
   const dist2 = (t1, t2) => Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY)
   const center2 = (t1, t2) => ({ x: (t1.clientX + t2.clientX) / 2, y: (t1.clientY + t2.clientY) / 2 })
   const onTouchStart = (e) => {
@@ -170,8 +147,7 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
       const [t1, t2] = e.touches
       const d = dist2(t1, t2)
       const { dist, scale: s0, center } = pinchRef.current
-      const next = clamp((d / dist) * s0, 1, 5)
-      zoomAt(center.x, center.y, next)
+      zoomAt(center.x, center.y, clamp((d / dist) * s0, 1, 5))
     } else if (e.touches.length === 1 && scale > 1) {
       e.preventDefault()
       const t = e.touches[0]
@@ -188,40 +164,35 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
   }
   const onTouchEnd = (e) => {
     setDragging(false)
-    if (e.changedTouches && e.changedTouches.length === 1 && scale === 1) {
+    if (e.changedTouches?.length === 1 && scale === 1) {
       const endX = e.changedTouches[0].clientX
       const delta = endX - (startXRef.current ?? endX)
-      const threshold = 40
-      if (delta > threshold) onPrev?.()
-      else if (delta < -threshold) onNext?.()
+      if (delta > 40) onPrev?.()
+      else if (delta < -40) onNext?.()
     }
   }
 
-  // 點背景 → 下一張
   const handleOverlayClick = () => onNext?.()
 
-  // 這裡調整「稍微靠上」＋ 可滾動
-  // top/bottom 間距可調：pt-[8vh] pb-[6vh]
   return (
     <div
-      ref={scrollLayerRef}
-      className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-[999] bg-black/80 backdrop-blur-sm overflow-y-auto overscroll-contain"
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
     >
-      <div className="min-h-[100dvh] flex items-start justify-center px-4 md:px-6 pt-[8vh] pb-[6vh]">
-        {/* 固定視窗高度，讓圖片不會貼到底；同時保留捲動空間 */}
+      {/* 手機：更靠上（pt-3），且可整層上下捲動；桌機維持原來視覺 */}
+      <div className="min-h-[100svh] flex items-start justify-center px-3 sm:px-6 pt-3 sm:pt-8 pb-8 sm:pb-10">
         <div
           ref={viewportRef}
-          className="relative w-[92vw] max-w-[92vw] h-[82vh] md:h-[84vh] lg:h-[86vh] flex items-center justify-center touch-none select-none"
+          className="relative w-[92vw] max-w-[92vw] max-h-[88svh] sm:max-h-[86svh] md:h-[84vh] flex items-center justify-center touch-none select-none"
           onClick={(e) => { if (scale > 1) e.stopPropagation() }}
           onWheel={onWheel}
           onDoubleClick={onDoubleClick}
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
+          onMouseUp={stopDrag}
+          onMouseLeave={stopDrag}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -238,7 +209,7 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
             }}
             style={
               scale === 1
-                ? { transition: 'transform 80ms ease-out' } // 未放大：不套 transform → 正中且完整可見
+                ? { transition: 'transform 80ms ease-out' }
                 : {
                     transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
                     transformOrigin: '50% 50%',
@@ -257,7 +228,7 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
             <IconX className="h-5 w-5" />
           </button>
 
-          {/* 左右切換：手機也顯示，放大按鈕觸控面積 */}
+          {/* 左右切換（手機也顯示） */}
           <button
             onClick={(e) => { e.stopPropagation(); onPrev?.() }}
             className="flex items-center justify-center absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-white/90 hover:bg-white shadow-md p-3 active:scale-95"
@@ -275,7 +246,7 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
             <IconChevronRight className="h-6 w-6" />
           </button>
 
-          {/* 右下角比例 + 重置（放大後顯示） */}
+          {/* 比例 + 重置（放大後顯示） */}
           {scale > 1 && (
             <div className="absolute right-0 bottom-0 m-2 flex items-center gap-2 text-xs">
               <span className="rounded bg-black/60 text-white px-2 py-1">{Math.round(scale * 100)}%</span>
@@ -290,10 +261,10 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
         </div>
       </div>
 
-      {/* 下方提示（靠下但不貼底） */}
-      <div className="sticky bottom-3 w-full flex justify-center px-4 md:px-6">
-        <div className="text-white/80 text-xs md:text-sm px-3 py-1 rounded-full bg-black/30">
-          未放大：滑鼠滾輪/手機可上下捲動；雙擊或 Ctrl+滾輪放大，放大後可拖曳與雙指縮放
+      {/* 提示 */}
+      <div className="sticky bottom-3 w-full flex justify-center px-4 sm:px-6">
+        <div className="text-white/80 text-xs sm:text-sm px-3 py-1 rounded-full bg-black/30">
+          未放大：上下滑可捲動畫面；雙擊或 Ctrl+滾輪放大，放大後可拖曳與雙指縮放
         </div>
       </div>
     </div>
