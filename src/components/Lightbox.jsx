@@ -44,8 +44,8 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
     const rImg = natural.w / natural.h
     const rVp = vp.width / vp.height
     
-    const maxWidth = vp.width * 0.75
-    const maxHeight = vp.height * 0.75
+    const maxWidth = vp.width * 0.9
+    const maxHeight = vp.height * 0.9
     
     if (rVp < rImg) {
       const w = Math.min(vp.width, maxWidth)
@@ -234,10 +234,10 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
       aria-modal="true"
     >
       {/* 主要容器 - 手機版優化 */}
-      <div className="min-h-[100svh] flex items-center justify-center p-3 sm:p-4 md:p-6">
+      <div className="min-h-[100svh] flex items-center justify-center p-3 sm:p-4 md:p-8">
         <div
           ref={viewportRef}
-          className="relative w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl h-full max-h-[90svh] flex items-center justify-center touch-none select-none"
+          className="relative w-full max-w-5xl lg:max-w-6xl xl:max-w-7xl h-full max-h-[92svh] flex items-center justify-center touch-none select-none rounded-[2rem] border border-white/15 bg-black/30 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.65)] overflow-hidden backdrop-blur-xl"
           onClick={handleImageClick}
           onWheel={onWheel}
           onDoubleClick={onDoubleClick}
@@ -261,10 +261,10 @@ export default function Lightbox({ open, items = [], index = 0, onClose, onPrev,
             }}
             style={
               scale === 1
-                ? { 
+                ? {
                     transition: 'transform 150ms ease-out',
-                    maxWidth: '90vw',
-                    maxHeight: '80svh'
+                    maxWidth: '94vw',
+                    maxHeight: '85svh'
                   }
                 : {
                     transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
