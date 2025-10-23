@@ -1,15 +1,10 @@
 import { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import FallingPetals from './components/FallingPetals'
 import { ThemeProvider } from './theme/ThemeContext'
 
 const Home = lazy(() => import('./pages/Home'))
-const Story = lazy(() => import('./pages/Story'))
-const GalleryPage = lazy(() => import('./pages/GalleryPage'))
-const SeatingPage = lazy(() => import('./pages/SeatingPage'))
-const CreatorContact = lazy(() => import('./pages/CreatorContact'))
 
 export default function App(){
   return (
@@ -26,13 +21,7 @@ export default function App(){
             </div>
           )}
         >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/story" element={<Story />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/seating" element={<SeatingPage />} />
-            <Route path="/creator" element={<CreatorContact />} />
-          </Routes>
+          <Home />
         </Suspense>
         <Footer />
       </div>
