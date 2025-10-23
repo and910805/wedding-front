@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
 import { AutoThemeTarget } from '../theme/ThemeContext'
-import WeddingInvitationModal from '../components/WeddingInvitationModal'
+
+const WeddingInvitationModal = lazy(() => import('../components/WeddingInvitationModal'))
 
 export default function Home() {
   const [isInvitationOpen, setInvitationOpen] = useState(true)
@@ -100,7 +101,17 @@ export default function Home() {
         </div>
       </motion.section>
 
-      <WeddingInvitationModal open={isInvitationOpen} onClose={closeInvitation} />
+      <Suspense
+        fallback={(
+          <div className="flex items-center justify-center bg-white/70 py-10">
+            <p className="font-serif text-base tracking-[0.3em] text-cinnabar/70">
+              婚禮資訊載入中⋯
+            </p>
+          </div>
+        )}
+      >
+        <WeddingInvitationModal open={isInvitationOpen} onClose={closeInvitation} />
+      </Suspense>
     </main>
   )
 }
