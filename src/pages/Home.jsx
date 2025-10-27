@@ -87,11 +87,14 @@ export default function Home() {
               <span className="h-2 w-2 rounded-full bg-gradient-to-br from-cinnabar to-rose-400" aria-hidden="true"></span>
               Wedding Day
             </div>
-            <div>
-              <h1 className="text-3xl font-serif leading-tight text-stone-900 md:text-5xl">
-                莊雨瑄 ＆ 趙國宏
-              </h1>
-              <p className="mt-4 font-sans text-base leading-relaxed text-stone-700 md:text-lg">
+            <div className="space-y-4">
+              <div className="relative inline-block">
+                <div className="absolute inset-x-0 -bottom-3 h-3 rounded-full bg-rose-100/70 blur-md" aria-hidden="true"></div>
+                <h1 className="relative bg-gradient-to-r from-stone-900 via-cinnabar/80 to-stone-900 bg-clip-text text-2xl font-serif tracking-wide text-transparent md:text-4xl">
+                  莊雨瑄 ＆ 趙國宏
+                </h1>
+              </div>
+              <p className="font-sans text-sm leading-relaxed text-stone-600/90 md:text-base">
                 滿載真摯與浪漫的婚禮網站，收藏我們相守的約定，也誠摯邀請您一同蒞臨見證。
               </p>
             </div>
@@ -124,7 +127,7 @@ export default function Home() {
               </p>
               <div className="rounded-2xl border border-rose-100/70 bg-white/80 p-4">
                 <p className="font-sans text-sm text-stone-500">WEDDING DATE</p>
-                <p className="mt-2 text-2xl font-serif text-stone-900">2024 · 12 · 08</p>
+                <p className="mt-2 text-2xl font-serif text-stone-900">2025 · 11 · 30</p>
                 <p className="mt-3 font-sans text-sm text-stone-600">
                   新娘莊雨瑄、新郎趙國宏，誠摯邀請您攜手走進我們的幸福時光。
                 </p>
