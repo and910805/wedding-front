@@ -18,6 +18,7 @@
   font-family: var(--font-sans);
   color: #2b2b2b;
   letter-spacing: 0.02em;
+  scroll-behavior: smooth;
 }
 body { @apply min-h-screen antialiased; }
 

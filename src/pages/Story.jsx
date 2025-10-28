@@ -23,9 +23,9 @@ function Timeline({items}){
           }}
         >
           <div>
-            <h3 className="text-xl md:text-2xl">{s.title}</h3>
+            <h3 className="text-xl md:text-2xl font-serif">{s.title}</h3>
             <p className="font-sans text-stone-600 mt-1 text-sm md:text-base">{s.date} · {s.place}</p>
-            <p className="mt-3 md:mt-4 leading-relaxed text-sm md:text-base">{s.text}</p>
+            <p className="mt-3 md:mt-4 font-sans leading-relaxed text-sm md:text-base">{s.text}</p>
           </div>
           <motion.div
             className="rounded-xl border border-stone-300/40 shadow-soft md:rounded-2xl"

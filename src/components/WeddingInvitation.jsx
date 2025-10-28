@@ -1,6 +1,6 @@
 // src/components/WeddingInvitation.jsx
 import clsx from 'classnames'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 
 /* === 動畫參數（2s / 1s / 1s） === */
@@ -55,15 +55,6 @@ export default function WeddingInvitation({ className = '' }) {
   const prefersReducedMotion = useReducedMotion()
   const petals = useMemo(() => createPetalField(isOpen), [isOpen])
   const bgImage = useMemo(() => `url("data:image/svg+xml,${encodeURIComponent(floralPatternSvg)}")`, [])
-
-  // 手機：未開封時鎖住整頁滾動，讓信封固定置中
-  useEffect(() => {
-    if (typeof document === 'undefined') return
-    const prev = document.body.style.overflow
-    if (!isOpen) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = prev || ''
-    return () => { document.body.style.overflow = prev }
-  }, [isOpen])
 
   return (
     <div className={clsx('relative mx-auto w-full max-w-3xl px-4 py-6 sm:max-w-4xl sm:px-6 md:max-w-5xl md:py-8 lg:max-w-6xl', className)}>
