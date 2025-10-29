@@ -2,10 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
-import packageJson from './package.json' assert { type: 'json' }
+import packageJson from './package.json' with { type: 'json' }
 
-const REPO_BASE_PATH = '/wedding-front/'
-const CUSTOM_DOMAIN_FLAGS = ['true', '1', 'yes', 'on']
+// ✅ 新增這段
+const CUSTOM_DOMAIN_FLAGS = ['true', '1', 'yes', 'on', 'custom', 'kuanlin.pro']
+
+const REPO_BASE_PATH = '/eric-s-dev-site/'  // 改成你的 repo 名稱以防 fallback 時錯誤
+const FORCE_CUSTOM_DOMAIN = true  // 🔥 強制使用自訂網域
 
 const resolveBasePath = (mode) => {
   const projectRoot = process.cwd()
@@ -31,7 +34,7 @@ const resolveBasePath = (mode) => {
     }
   })()
 
-  const usingCustomDomain = hasCustomDomainFlag || hasCname
+  const usingCustomDomain = FORCE_CUSTOM_DOMAIN || hasCustomDomainFlag || hasCname
   const basePath = usingCustomDomain ? '/' : homepageBase
 
   console.log(
@@ -43,16 +46,14 @@ const resolveBasePath = (mode) => {
   return basePath
 }
 
-// ⚙️ 這個設定讓本地開發能在內網 IP 上訪問
 export default defineConfig(({ mode }) => {
   const base = resolveBasePath(mode)
-
   return {
     plugins: [react()],
-    base, // ✅ 根據部署情境調整 base
+    base,
     server: {
-      host: '0.0.0.0', // ✅ 讓同網段的電腦可以連進來（例如 192.168.150.x）
-      port: 5173, // 📡 預設可改
+      host: '0.0.0.0',
+      port: 5173,
     },
   }
 })
