@@ -72,7 +72,7 @@ export default function Seating() {
           animation: pulse-once 1s ease-in-out 2;
         }
       `}</style>
-      <div className="grid gap-6 md:grid-cols-2 md:gap-10">
+      <div className="grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
         <div>
           <h3 className="mb-3 text-xl font-serif text-stone-800 md:text-2xl">查詢座位</h3>
           <div className="relative">
@@ -158,7 +158,7 @@ export default function Seating() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {tables.map((table) => {
             const isActive = highlightTableId === table.id;
             const isDimmed = Boolean(highlightTableId && !isActive);
@@ -177,14 +177,13 @@ export default function Seating() {
                 <div className="font-serif text-lg text-stone-800">{table.name}</div>
 
                 <div
-                  className={`relative mx-auto mt-3 h-40 w-40 rounded-full border-[6px] ${ringClass} bg-gradient-to-b from-white to-ivory shadow-[0_10px_30px_rgba(0,0,0,0.08)]`}
+                  className={`relative mx-auto mt-3 aspect-square w-40 max-w-[min(17rem,80vw)] rounded-full border-[6px] ${ringClass} bg-gradient-to-b from-white to-ivory shadow-[0_10px_30px_rgba(0,0,0,0.08)] sm:w-44 lg:w-48`}
+                  style={{ "--seat-radius": "calc(50% - 1.25rem)" }}
                 >
                   <span className="pointer-events-none absolute inset-0 rounded-full shadow-[inset_0_0_0_6px_rgba(255,255,255,0.7)]"></span>
 
                   {Array.from({ length: table.seats }).map((_, index) => {
-                    const angle = (index / table.seats) * Math.PI * 2;
-                    const x = 80 + Math.cos(angle) * 76;
-                    const y = 80 + Math.sin(angle) * 76;
+                    const angleDeg = (index / table.seats) * 360;
 
                     const occupant = guests.find(
                       (guest) => guest.tableId === table.id && guest.seatNo === index + 1,
@@ -192,7 +191,7 @@ export default function Seating() {
                     const isYou = result?.guest && occupant?.name === result.guest.name;
 
                     const base =
-                      "absolute -translate-x-1/2 -translate-y-1/2 h-5 w-5 rounded-full border transition-transform duration-300 ease-out";
+                      "absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-transform duration-300 ease-out";
                     let cls = `${base} bg-white border-stone-300/60`;
 
                     if (occupant) {
@@ -210,9 +209,11 @@ export default function Seating() {
                     return (
                       <div
                         key={index}
-                        style={{ left: x, top: y }}
                         title={title}
                         className={cls}
+                        style={{
+                          transform: `rotate(${angleDeg}deg) translateX(var(--seat-radius)) rotate(-${angleDeg}deg)`,
+                        }}
                       />
                     );
                   })}

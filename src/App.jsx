@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import FallingPetals from './components/FallingPetals'
@@ -6,7 +6,28 @@ import { ThemeProvider } from './theme/ThemeContext'
 
 const Home = lazy(() => import('./pages/Home'))
 
+function useHashScroll(){
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '')
+    if (!hash) return
+
+    const scrollToTarget = () => {
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    // 嘗試立即與延遲滾動，確保懶載入內容也能對齊
+    scrollToTarget()
+    const timeoutId = window.setTimeout(scrollToTarget, 220)
+    return () => window.clearTimeout(timeoutId)
+  }, [])
+}
+
 export default function App(){
+  useHashScroll()
+
   return (
     <ThemeProvider>
       <FallingPetals />

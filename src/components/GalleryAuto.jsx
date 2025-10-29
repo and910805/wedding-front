@@ -58,14 +58,14 @@ export default function GalleryAuto() {
             </svg>
             進入放映模式
           </button>
-          <p className="font-sans text-xs sm:text-sm md:text-base text-stone-500 mt-3 whitespace-nowrap">
+          <p className="font-sans text-xs sm:text-sm md:text-base text-stone-500 mt-3 text-center sm:text-left">
             點擊上方按鈕以全螢幕幻燈片模式瀏覽所有照片，享受沉浸式的觀看體驗
           </p>
         </div>
       </div>
 
       {/* 圖片網格 - 移除點擊功能，只做展示 */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
         {items.map((src, i) => (
           <div
             key={`${src}-${i}`}

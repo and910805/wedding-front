@@ -16,6 +16,11 @@ export default function Navbar(){
 
   const navItems = useMemo(() => sections, [])
 
+  const handleMobileClick = (event) => {
+    const details = event.currentTarget.closest('details')
+    if (details) details.removeAttribute('open')
+  }
+
   return (
     <header className={`sticky top-0 z-50 border-b backdrop-blur ${theme==='tang' ? 'bg-cloud/85 border-cinnabar/15' : 'bg-ivory/85 border-gold/15'}`}>
       <div className="container-xl flex h-14 items-center justify-between md:h-16">
@@ -54,7 +59,7 @@ export default function Navbar(){
         </nav>
         <div className="md:hidden">
           <details className="relative">
-            <summary className={`flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-sans ${theme==='tang' ? 'border-cinnabar/40 text-cinnabar' : 'border-forest/40 text-forest'}`}>
+            <summary className={`flex cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm font-sans ${theme=='tang' ? 'border-cinnabar/40 text-cinnabar' : 'border-forest/40 text-forest'}`}>
               導覽
               <span className="text-base">⌄</span>
             </summary>
@@ -63,10 +68,7 @@ export default function Navbar(){
                 <li key={href}>
                   <a
                     href={href}
-                    onClick={(event) => {
-                      const details = event.currentTarget.closest('details')
-                      if (details) details.removeAttribute('open')
-                    }}
+                    onClick={handleMobileClick}
                     className="block px-4 py-3 text-sm text-stone-700 transition hover:bg-rose-50/80"
                   >
                     {label}
